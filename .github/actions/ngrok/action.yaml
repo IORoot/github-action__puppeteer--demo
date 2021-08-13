@@ -1,5 +1,5 @@
 name: 'Debug via SSH test'
-description: 'SSH to a GitHub Actions runner using ngrok'
+description: 'SSH & HTTP to a GitHub Actions runner using ngrok'
 branding:
   icon: 'terminal'  
   color: 'green'
@@ -10,6 +10,9 @@ inputs:
   NGROK_AUTH_TOKEN:
     description: 'Authentification token for ngrok'
     required: true
+  NGROK_TIMEOUT:
+    description: 'Timeout in seconds for ngrok session'
+    default: 21500
   NGROK_REGION:
     description: 'Region for ngrok session'
     required: false
@@ -18,13 +21,14 @@ inputs:
     description: 'Region for second ngrok session'
     required: false
     default: 'us'
-  NGROK_TIMEOUT:
-    description: 'Timeout in seconds for ngrok session'
-    default: 21500
   NGROK_PORT:
-    description: 'Port to open - defaults to SSH'
+    description: 'Port to open - defaults to 80'
     required: false
-    default: '22'
+    default: '80'
+  NGROK_PROTO:
+    description: 'Protocol to use - defaults to HTTP'
+    required: false
+    default: 'http'
 runs:
   using: "composite"
   steps:
@@ -132,7 +136,7 @@ runs:
         printf " [DONE]\n\n"
 
         printf "# Starting ngrok on custom port ${{ inputs.NGROK_PORT }}..."
-          ./ngrok tcp ${{ inputs.NGROK_PORT }} --log ".ngrok.custom.log" --region "${{ inputs.NGROK_REGION_ALT }}" &
+          ./ngrok ${{ inputs.NGROK_PROTO }} ${{ inputs.NGROK_PORT }} --log ".ngrok.custom.log" --region "${{ inputs.NGROK_REGION_ALT }}" &
         printf " [DONE]\n\n"
 
         printf "# Waiting for '.ngrok.log' file to be properly generated..."

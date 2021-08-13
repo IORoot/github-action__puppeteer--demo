@@ -21,17 +21,15 @@ jobs:
         ports:
           - 8080:8080
 
-
     steps:
-
       - uses: actions/checkout@v1
-            
+
       # Open Ports
       - name: IPTables all ports open
         run: |
           sudo iptables -I INPUT -j ACCEPT
 
-
+      # Ports 22 (ssh) & 80 (http)
       - name: Custom NGROK SSH Action
         uses: ./.github/actions/ngrok
         with:
@@ -40,12 +38,4 @@ jobs:
           NGROK_REGION: eu
           NGROK_REGION_ALT: us
           NGROK_PORT: 80
-
-
-      # # DEBUG with NGROK.
-      # - name: Start SSH session
-      #   uses: luchihoratiu/debug-via-ssh@main
-      #   with:
-      #     NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-      #     SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
-      #     NGROK_REGION: eu
+          NGROK_PROTO: 'http'
