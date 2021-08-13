@@ -19,6 +19,6 @@ jobs:
 
     steps:
 
-    - run: |
-      echo This job does specify a container.
-      echo $HOME
+      - name: echo something
+        run: |
+          echo $HOME
