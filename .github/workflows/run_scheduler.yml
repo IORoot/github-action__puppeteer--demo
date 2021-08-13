@@ -8,8 +8,18 @@ on:
 
 jobs:
   build:
+
+    runs-on: ubuntu-latest
+
     container:
       image: londonparkour/igs:latest
       credentials:
         username: londonparkour
         password: ${{ secrets.docker_hub_password}}
+
+    steps:
+
+    - run: |
+      echo This job does specify a container.
+      ls /
+      echo $HOME
