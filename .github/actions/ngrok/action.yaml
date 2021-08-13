@@ -13,6 +13,10 @@ inputs:
   NGROK_REGION:
     description: 'Region for ngrok session'
     required: false
+    default: 'eu'  
+  NGROK_REGION_ALT:
+    description: 'Region for second ngrok session'
+    required: false
     default: 'us'
   NGROK_TIMEOUT:
     description: 'Timeout in seconds for ngrok session'
@@ -20,10 +24,12 @@ inputs:
   NGROK_PORT:
     description: 'Port to open - defaults to SSH'
     required: false
-    default: 22'
+    default: '22'
 runs:
   using: "composite"
   steps:
+
+  
     - name: Check inputs
       run: |
         if [ -z "${{ inputs.SSH_PASS }}" ]
@@ -38,6 +44,9 @@ runs:
           exit 1
         fi
       shell: bash
+
+
+
     - name: Meet OS specific prerequisites
       run: |
         if('${{ runner.os }}' -eq 'Linux')
@@ -89,7 +98,7 @@ runs:
             New-NetFirewallRule -Name ngrok -DisplayName 'ngrok' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
 
           echo "# Add Firewall rule to allow inbound TCP connection on local port ${{ inputs.NGROK_PORT }}"
-            New-NetFirewallRule -Name ngrokcustom -DisplayName 'ngrok-custom' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort ${{ inputs.NGROK_PORT }}
+            New-NetFirewallRule -Name ngrokcustom -DisplayName 'ngrok-custom' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort ${{ inputs.NGROK_PORT_ALT }}
 
           echo "# Start the SSH server"
             net start BvSshServer
@@ -98,6 +107,9 @@ runs:
             net user $env:UserName ${{ inputs.SSH_PASS }}
         }
       shell: pwsh
+
+
+
 
     - name: Install and setup ngrok
       run: |
@@ -110,6 +122,9 @@ runs:
           ./ngrok authtoken ${{ inputs.NGROK_AUTH_TOKEN }}
       shell: bash
 
+
+
+
     - name: Start ngrok
       run: |
         printf "# Starting ngrok..."
@@ -117,7 +132,7 @@ runs:
         printf " [DONE]\n\n"
 
         printf "# Starting ngrok on custom port ${{ inputs.NGROK_PORT }}..."
-          ./ngrok tcp ${{ inputs.NGROK_PORT }} --log ".ngrok.port${{ inputs.NGROK_PORT }}.log" --region "${{ inputs.NGROK_REGION }}" &
+          ./ngrok tcp ${{ inputs.NGROK_PORT }} --log ".ngrok.custom.log" --region "${{ inputs.NGROK_REGION_ALT }}" &
         printf " [DONE]\n\n"
 
         printf "# Waiting for '.ngrok.log' file to be properly generated..."

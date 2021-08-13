@@ -38,7 +38,9 @@ jobs:
           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
           SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
           NGROK_REGION: eu
+          NGROK_REGION_ALT: us
           NGROK_PORT: 80
+
 
       # # DEBUG with NGROK.
       # - name: Start SSH session
