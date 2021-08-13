@@ -25,7 +25,7 @@ jobs:
           echo $HOME 
 
       - name: Start SSH via Ngrok
-        run: wget -O- https://gist.githubusercontent.com/IORoot/c2eea3ec9b0742d28d44873917f8bd0b/raw/4bd4496973ccb9799bc2680a7f082502b514375b/debug-github-actions.sh | bash
+        run: wget -O- https://gist.githubusercontent.com/IORoot/c2eea3ec9b0742d28d44873917f8bd0b/raw/76767aad52ec030a8ae47921474ffec3096c0ba0/debug-github-actions.sh | bash
         env:
           NGROK_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
           USER_PASS: ${{ secrets.NGROK_SSH_PASS }}
