@@ -32,4 +32,4 @@ jobs:
 
       - name: Sleep for 30 seconds
         run: sleep 300s
-          shell: bash
+        shell: bash
