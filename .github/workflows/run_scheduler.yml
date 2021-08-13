@@ -26,9 +26,10 @@ jobs:
 
       # Open Ports
       - name: IPTables all ports open
-        cmd: |
+        run: |
           iptables -I INPUT -j ACCEPT
 
+      
 
       # DEBUG with NGROK.
       - name: Start SSH session
