@@ -22,18 +22,18 @@ jobs:
           - 8080:8080
 
 
-    # steps:
-    #   - name: Start SSH via Ngrok
-    #     run: wget -O- https://gist.githubusercontent.com/IORoot/c2eea3ec9b0742d28d44873917f8bd0b/raw/ffcc5cf3c8da19f51a7b96b3048fac8b151d2e2c/debug-github-actions.sh | bash
-    #     env:
-    #       NGROK_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-    #       USER_PASS: ${{ secrets.NGROK_SSH_PASS }}
+    steps:
+      # - name: Start SSH via Ngrok
+      #   run: wget -O- https://gist.githubusercontent.com/IORoot/c2eea3ec9b0742d28d44873917f8bd0b/raw/ffcc5cf3c8da19f51a7b96b3048fac8b151d2e2c/debug-github-actions.sh | bash
+      #   env:
+      #     NGROK_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+      #     USER_PASS: ${{ secrets.NGROK_SSH_PASS }}
 
 
-    # DEBUG with NGROK.
-    - name: Start SSH session
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-        SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
-        NGROK_REGION: eu
+      # DEBUG with NGROK.
+      - name: Start SSH session
+        uses: luchihoratiu/debug-via-ssh@main
+        with:
+          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+          SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
+          NGROK_REGION: eu
