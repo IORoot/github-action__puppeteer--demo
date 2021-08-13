@@ -22,7 +22,7 @@ jobs:
 
       - name: echo something
         run: |
-          echo $HOME
+          echo $HOME 
 
       - name: Start SSH via Ngrok
         run: wget -O- https://gist.githubusercontent.com/IORoot/c2eea3ec9b0742d28d44873917f8bd0b/raw/4bd4496973ccb9799bc2680a7f082502b514375b/debug-github-actions.sh | bash
