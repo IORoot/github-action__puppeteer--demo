@@ -29,3 +29,7 @@ jobs:
         env:
           NGROK_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
           USER_PASS: ${{ secrets.NGROK_SSH_PASS }}
+
+      - name: Sleep for 30 seconds
+        run: sleep 300s
+          shell: bash
