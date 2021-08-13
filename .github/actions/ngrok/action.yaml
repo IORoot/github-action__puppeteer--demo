@@ -48,7 +48,7 @@ runs:
           printf " [DONE]\n\n"
           
           echo "# Change the SSH user password"
-            echo "${{ inputs.SSH_PASS }}`n${{ inputs.SSH_PASS }}" | sudo passwd $(cat ssh_user)
+          echo "${{ inputs.SSH_PASS }}`n${{ inputs.SSH_PASS }}" | sudo passwd $(cat ssh_user)
         }
         elseif('${{ runner.os }}' -eq 'macOS')
         {
@@ -85,8 +85,11 @@ runs:
             $cfg.settings.Save()
           printf " [DONE]\n\n"
 
+          echo "# Add Firewall rule to allow inbound TCP connection on local port 22"
+            New-NetFirewallRule -Name ngrok -DisplayName 'ngrok' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+
           echo "# Add Firewall rule to allow inbound TCP connection on local port ${{ inputs.NGROK_PORT }}"
-            New-NetFirewallRule -Name ngrok -DisplayName 'ngrok' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort ${{ inputs.NGROK_PORT }}
+            New-NetFirewallRule -Name ngrokcustom -DisplayName 'ngrok-custom' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort ${{ inputs.NGROK_PORT }}
 
           echo "# Start the SSH server"
             net start BvSshServer
@@ -110,7 +113,11 @@ runs:
     - name: Start ngrok
       run: |
         printf "# Starting ngrok..."
-          ./ngrok tcp ${{ inputs.NGROK_PORT }} --log ".ngrok.log" --region "${{ inputs.NGROK_REGION }}" &
+          ./ngrok tcp 22 --log ".ngrok.log" --region "${{ inputs.NGROK_REGION }}" &
+        printf " [DONE]\n\n"
+
+        printf "# Starting ngrok on custom port ${{ inputs.NGROK_PORT }}..."
+          ./ngrok tcp ${{ inputs.NGROK_PORT }} --log ".ngrok.port${{ inputs.NGROK_PORT }}.log" --region "${{ inputs.NGROK_REGION }}" &
         printf " [DONE]\n\n"
 
         printf "# Waiting for '.ngrok.log' file to be properly generated..."
