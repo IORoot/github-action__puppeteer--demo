@@ -27,7 +27,7 @@ jobs:
       # Open Ports
       - name: IPTables all ports open
         run: |
-          iptables -I INPUT -j ACCEPT
+          sudo iptables -I INPUT -j ACCEPT
 
       
 
