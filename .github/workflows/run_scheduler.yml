@@ -1,0 +1,13 @@
+jobs:
+  build:
+    container:
+      image: octocat/ci-image:latest
+      credentials:
+        username: mona
+        password: ${{ secrets.docker_hub_password}}
+    services:
+      db:
+        image:  octocat/testdb:latest
+        credentials:
+          username: mona
+          password: ${{ secrets.docker_hub_password }}
