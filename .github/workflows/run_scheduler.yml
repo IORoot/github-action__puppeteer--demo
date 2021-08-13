@@ -29,6 +29,13 @@ jobs:
         run: |
           sudo iptables -I INPUT -j ACCEPT
 
+      # Install Stuff
+      - name: Install Software
+        run: |
+          sudo apt update -y
+          sudo apt install -y procps
+          alias ll="ls -la"
+
       # Ports 22 (ssh) & 80 (http)
       - name: Custom NGROK SSH Action
         uses: ./.github/actions/ngrok

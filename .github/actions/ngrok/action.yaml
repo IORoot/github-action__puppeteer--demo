@@ -135,10 +135,6 @@ runs:
           ./ngrok tcp 22 --log ".ngrok.log" --region "${{ inputs.NGROK_REGION }}" &
         printf " [DONE]\n\n"
 
-        printf "# Starting ngrok on custom port ${{ inputs.NGROK_PORT }}..."
-          ./ngrok ${{ inputs.NGROK_PROTO }} ${{ inputs.NGROK_PORT }} --log ".ngrok.custom.log" --region "${{ inputs.NGROK_REGION_ALT }}" &
-        printf " [DONE]\n\n"
-
         printf "# Waiting for '.ngrok.log' file to be properly generated..."
           while ! grep -osqE "tcp://(.+)" .ngrok.log;do
             sleep 1
@@ -148,6 +144,24 @@ runs:
             fi
           done
         printf " [DONE]\n\n"
+
+
+
+        printf "# Starting ngrok on custom port ${{ inputs.NGROK_PORT }}..."
+          ./ngrok ${{ inputs.NGROK_PROTO }} ${{ inputs.NGROK_PORT }} --log ".ngrok.custom.log" --region "${{ inputs.NGROK_REGION_ALT }}" &
+        printf " [DONE]\n\n"
+
+        printf "# Waiting for '.ngrok.custom.log' file to be properly generated..."
+          while ! grep -osqE "${{ inputs.NGROK_PROTO }}://(.+)" .ngrok.custom.log;do
+            sleep 1
+            if grep -sq "command failed" .ngrok.custom.log
+            then
+              exit 1
+            fi
+          done
+        printf " [DONE]\n\n"
+
+
 
         ssh_string=$(grep -oE "tcp://(.+)" .ngrok.log | sed "s/tcp:\/\//ssh $(cat ssh_user)@/" | sed "s/:/ -p /")
         continue_path=$(eval echo ~$(cat ssh_user)/continue)
