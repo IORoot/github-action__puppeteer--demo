@@ -6,7 +6,7 @@
     "license": "MIT",
     "main": "test.js",
     "scripts": {
-        "test": "node get_title.js"
+        "gettitle": "node get_title.js"
     },
     "repository": "IORoot/puppeteer__creator-studio--instagram"
 }

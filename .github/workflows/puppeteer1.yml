@@ -28,4 +28,4 @@ jobs:
       - name: Run
         uses: ianwalter/puppeteer-container@v4.0.0
         with:
-          args: pnpm t
+          args: pnpm run gettitle
