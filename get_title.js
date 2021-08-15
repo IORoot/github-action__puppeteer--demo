@@ -9,7 +9,12 @@
     const puppeteer = require('puppeteer');
 
     (async () => {
-        const browser = await puppeteer.launch()
+        
+        const browser = await puppeteer.launch({
+            executablePath: process.env.PUPPETEER_EXEC_PATH, // set by docker container
+            headless: false,
+        });
+        
         const page = await browser.newPage()
         await page.goto('https://londonparkour.com/')
         const title = await page.title()
