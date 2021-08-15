@@ -1,4 +1,4 @@
-name: (RUN) Instagram Scheduler
+name: (archived)
 
 on:
   workflow_dispatch:

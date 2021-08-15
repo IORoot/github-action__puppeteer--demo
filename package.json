@@ -1,0 +1,12 @@
+{
+    "name": "runner__puppeteer--screenshot",
+    "version": "1.0.0",
+    "author": "Andy Pearson (https://ioroot.com)",
+    "description": "Allows you to take a screenshot with puppeteer",
+    "license": "MIT",
+    "main": "test.js",
+    "scripts": {
+        "start": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": "IORoot/puppeteer__creator-studio--instagram"
+}
