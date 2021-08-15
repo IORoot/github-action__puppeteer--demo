@@ -5,9 +5,9 @@
     "description": "Allows you to take a screenshot with puppeteer",
     "license": "MIT",
     "dependencies": {
-        "puppeteer-core": "^5.4.1"
+        "puppeteer": "^10.2.0"
     },
-    "main": "test.js",
+    "main": "get_title.js",
     "scripts": {
         "gettitle": "node get_title.js"
     },
