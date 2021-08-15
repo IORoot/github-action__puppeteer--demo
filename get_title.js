@@ -1,12 +1,14 @@
 'use strict';
 
-const puppeteer = require('puppeteer-core');
+    const puppeteer = require('puppeteer-core');
 
 
     (async () => {
 
         const browser = await puppeteer.launch({
-            args: ['--no-sandbox'],
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH, // set by docker container
+            headless: false,
         });
         
         const page = await browser.newPage()
