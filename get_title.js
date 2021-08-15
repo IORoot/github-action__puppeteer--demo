@@ -6,7 +6,7 @@
  * @see {@link https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagetitle}
  */
 
-    const puppeteer = require('puppeteer');
+    const puppeteer = require('puppeteer-core');
 
     (async () => {
 

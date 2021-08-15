@@ -4,6 +4,9 @@
     "author": "Andy Pearson (https://ioroot.com)",
     "description": "Allows you to take a screenshot with puppeteer",
     "license": "MIT",
+    "dependencies": {
+        "puppeteer-core": "^5.4.1"
+    },
     "main": "test.js",
     "scripts": {
         "gettitle": "node get_title.js"
