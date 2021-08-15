@@ -1,13 +1,7 @@
-/**
- * @name get title
- *
- * @desc Get the title of a page and print it to the console.
- *
- * @see {@link https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagetitle}
- */
+'use strict';
 
-    // const puppeteer = require('puppeteer');
-    import puppeteer from 'puppeteer';
+const puppeteer = require('puppeteer-core');
+
 
     (async () => {
 

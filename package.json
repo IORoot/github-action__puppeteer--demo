@@ -5,11 +5,11 @@
     "description": "Allows you to take a screenshot with puppeteer",
     "license": "MIT",
     "dependencies": {
-        "puppeteer": "^10.2.0"
+        "puppeteer-core": "^10.2.0"
     },
     "main": "get_title.js",
     "scripts": {
-        "gettitle": "node get_title.js"
+        "test": "node get_title.js"
     },
     "repository": "IORoot/puppeteer__creator-studio--instagram"
 }
