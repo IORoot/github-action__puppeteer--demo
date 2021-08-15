@@ -6,7 +6,7 @@
     "license": "MIT",
     "main": "test.js",
     "scripts": {
-        "start": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": "IORoot/puppeteer__creator-studio--instagram"
 }
