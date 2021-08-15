@@ -8,7 +8,7 @@
         const browser = await puppeteer.launch({
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
             executablePath: process.env.PUPPETEER_EXECUTABLE_PATH, // set by docker container
-            headless: false,
+            headless: true,
         });
         
         const page = await browser.newPage()
