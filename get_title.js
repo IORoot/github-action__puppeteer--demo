@@ -6,9 +6,7 @@ const puppeteer = require('puppeteer-core');
     (async () => {
 
         const browser = await puppeteer.launch({
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            executablePath: process.env.PUPPETEER_EXEC_PATH, // set by docker container
-            headless: false,
+            args: ['--no-sandbox'],
         });
         
         const page = await browser.newPage()
