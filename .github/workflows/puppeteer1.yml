@@ -10,26 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+
+    - uses: actions/checkout@master
+
+    - name: Install Dependencies
+      uses: actions/setup-node@v1
+      env:
+        PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
+      with:
+        args: install
 
 
-      - name: Install
-        uses: ianwalter/puppeteer-container@acc52cd2334ad9eaf6e1974562d263e0a711b7e8
-        with:
-          args: pnpm i
+    # DEBUG with NGROK.
+    - name: Start SSH session
+      uses: luchihoratiu/debug-via-ssh@main
+      with:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+        SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
+        NGROK_REGION: eu
 
+        
 
-      # DEBUG with NGROK.
-      - name: Start SSH session
-        uses: luchihoratiu/debug-via-ssh@main
-        with:
-          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-          SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
-          NGROK_REGION: eu
-          
+    - name: Test Code
+      uses: mujo-code/puppeteer-headful@master
+      env:
+        CI: 'true'
+      with:
+        args: npm test
 
-      - name: Test
-        uses: ianwalter/puppeteer-container@acc52cd2334ad9eaf6e1974562d263e0a711b7e8
-        with:
-          args: pnpm t
