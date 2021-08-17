@@ -13,6 +13,13 @@ jobs:
 
     - uses: actions/checkout@master
 
+    - name: info
+      run: |
+        pwd
+        cd
+        pwd
+        whoami
+
     - name: Test Code
       uses: IORoot/action__puppeteer--media@master
       env:
