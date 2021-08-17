@@ -20,12 +20,22 @@ jobs:
         pwd
         whoami
 
+        
+    - name: Install
+      uses: IORoot/action__puppeteer--media@master
+      env:
+        CI: 'true'
+      with:
+        args: npm install
+
+
     - name: Test Code
       uses: IORoot/action__puppeteer--media@master
       env:
         CI: 'true'
       with:
-        args: npm install; node puppeteer.js
+        args: node puppeteer.js
+
 
     # - name: Install Dependencies
     #   uses: actions/setup-node@v1
