@@ -71,14 +71,18 @@ var runner = (function () {
                 await page.waitForTimeout(1000);
                 console.log('Visiting Target Page');
                 page.goto(pages.target, {waitUntil: 'domcontentloaded'});
+                console.log('Taking screenshot');
                 await page.screenshot({path: './screenshot.png'})
+                console.log('Page Title');
+                const title = await page.title()
+                console.log(title)
             } catch (err) {
                 console.log('Error visiting Target Page : ' + err);
                 return;
             } 
             
 
-            
+
             /**
              * Done
              */
