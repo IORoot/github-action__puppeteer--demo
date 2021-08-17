@@ -65,7 +65,7 @@ var runner = (function () {
              */
             try {
                 console.log('Visiting Target Page');
-                page.goto('https://www.bbc.co.uk/news', {waitUntil: 'domcontentloaded'});
+                await page.goto('https://www.bbc.co.uk/news', { waitUntil: "networkidle2" });
                 const title = await page.title()
                 console.log(title)
 
