@@ -47,7 +47,7 @@ var runner = (function () {
 
             
             /**
-             * New Page goto target page and take screenshot
+             * New Page & viewport
              */
             try {
                 console.log('create page');
@@ -68,12 +68,20 @@ var runner = (function () {
                 await page.goto('https://www.bbc.co.uk/news', { waitUntil: "networkidle2" });
                 const title = await page.title()
                 console.log(title)
-
-                console.log('Taking screenshot');
-                await page.screenshot({path: './screenshot.png'})
-                
             } catch (err) {
                 console.log('Error visiting Target Page : ' + err);
+                return;
+            } 
+
+
+            /**
+             * Take full page screenshot.
+             */
+            try {
+                console.log('Taking screenshot');
+                await page.screenshot({path: './screenshot.png', fullPage: true})
+            } catch (err) {
+                console.log('Error taking screenshot : ' + err);
                 return;
             } 
             
