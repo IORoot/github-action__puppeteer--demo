@@ -10,10 +10,6 @@ var runner = (function () {
     let browser;
     let page;
 
-    const pages = {
-        target:               'https://www.bbc.co.uk/news',
-    };
-
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -68,14 +64,14 @@ var runner = (function () {
              * Visit target Page.
              */
             try {
-                await page.waitForTimeout(1000);
                 console.log('Visiting Target Page');
-                page.goto(pages.target, {waitUntil: 'domcontentloaded'});
-                console.log('Taking screenshot');
-                await page.screenshot({path: './screenshot.png'})
-                console.log('Page Title');
+                page.goto('https://www.bbc.co.uk/news', {waitUntil: 'domcontentloaded'});
                 const title = await page.title()
                 console.log(title)
+
+                console.log('Taking screenshot');
+                await page.screenshot({path: './screenshot.png'})
+                
             } catch (err) {
                 console.log('Error visiting Target Page : ' + err);
                 return;
