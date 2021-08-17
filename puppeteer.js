@@ -10,6 +10,10 @@ var runner = (function () {
     let browser;
     let page;
 
+    const pages = {
+        target:               'https://www.bbc.co.uk/news',
+    };
+
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -47,7 +51,7 @@ var runner = (function () {
 
             
             /**
-             * New Page
+             * New Page goto target page and take screenshot
              */
             try {
                 console.log('create page');
@@ -61,11 +65,26 @@ var runner = (function () {
 
 
             /**
+             * Visit target Page.
+             */
+            try {
+                await page.waitForTimeout(1000);
+                console.log('Visiting Target Page');
+                page.goto(pages.target, {waitUntil: 'domcontentloaded'});
+                await page.screenshot({path: './screenshot.png'})
+            } catch (err) {
+                console.log('Error visiting Target Page : ' + err);
+                return;
+            } 
+            
+
+            
+            /**
              * Done
              */
             try {
                 console.log('Done');
-                await page.waitForTimeout(20000);
+                await page.waitForTimeout(1000);
                 await browser.close();
             } catch (err) { 
                 console.log('Error closing the browser : ' + err);
