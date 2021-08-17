@@ -13,28 +13,39 @@ jobs:
 
     - uses: actions/checkout@master
 
-    - name: Install Dependencies
-      uses: actions/setup-node@v1
-      env:
-        PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
-      with:
-        args: install
-
-
-    # DEBUG with NGROK.
-    - name: Start SSH session
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-        SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
-        NGROK_REGION: eu
-
-        
-
     - name: Test Code
-      uses: mujo-code/puppeteer-headful@master
+      uses: IORoot/action__puppeteer--media@master
       env:
         CI: 'true'
       with:
-        args: npm test
+        args: node puppeteer.js
+
+    # - name: Install Dependencies
+    #   uses: actions/setup-node@v1
+    #   env:
+    #     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
+    #   with:
+    #     args: install
+
+
+    # DEBUG with NGROK.
+    # - name: Start SSH session
+    #   uses: luchihoratiu/debug-via-ssh@main
+    #   with:
+    #     NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    #     SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
+    #     NGROK_REGION: eu
+
+    # Ports 22 (ssh) & 80 (http)
+    # - name: Custom NGROK SSH Action
+    #   uses: ./.github/actions/ngrok
+    #   with:
+    #     NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    #     SSH_PASS: ${{ secrets.NGROK_SSH_PASS }}
+    #     NGROK_REGION: eu
+    #     NGROK_REGION_ALT: us
+    #     NGROK_PORT: 80
+    #     NGROK_PROTO: 'http'
+
+
 
