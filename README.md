@@ -18,6 +18,7 @@ The key component of the package.json is that you include the `puppeteer-core` d
     }
 ```
 
+
 ### puppeteer.js
 
 This is the script that will execute and run puppeteer. I've made this a little more verbose and included some
