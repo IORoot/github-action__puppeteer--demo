@@ -32,3 +32,21 @@ runner.run();
 ```
 
 This in-turn, will call the `publicRun` method in the class - which will step through the try/catch blocks.
+
+
+### .github/workflows/puppeteer.yml
+
+The workflow action only has a manual `workflow_dispatch`, so you'll have to go into the 'actions' tab on github and
+manually run the action.
+
+This repo demonstrates the usage of the github action "IORoot/action__puppeteer--media@master" which will run a 
+docker container with an instance of puppeteer in it. 
+
+To use the action, it's a matter of running youre commands like so:
+
+```yaml
+    - name: Test Code
+      uses: IORoot/action__puppeteer--media@master
+      with:
+        args: npm install
+```
